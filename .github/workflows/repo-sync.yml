@@ -24,6 +24,7 @@ jobs:
           - 'HuberyYang-Space/equals-demo'
           - 'HuberyYang-Space/my-blog'
           - 'HuberyYang-Space/todo-scripts'
+          - 'HuberyYang-Space/50projects-vue3'
 
       fail-fast: false
     
