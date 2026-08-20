@@ -10,7 +10,7 @@ on:
 
 jobs:
   sync-to-repos:
-    name: 同步文件到指定仓库
+    name: 同步LICENSE到指定仓库
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -42,36 +42,14 @@ jobs:
       
       - name: 同步 LICENSE
         run: |
-          echo "开始同步文件到 ${{ matrix.repo }}"
-          
-          # 同步 workflows 目录
-          # if [ -d "source/.github/workflows" ]; then
-          #   echo "同步 .github/workflows 目录"
-          #   mkdir -p target/.github/workflows
-          #   cp -r source/.github/workflows/* target/.github/workflows/ || true
-          #   # 删除同步工作流本身,避免循环同步
-          #   rm -f target/.github/workflows/alternative-sync.yml
-          # fi
-          
-          # # 同步 shared 目录
-          # if [ -d "source/shared" ]; then
-          #   echo "同步 shared 目录"
-          #   mkdir -p target/shared
-          #   cp -r source/shared/* target/shared/ || true
-          # fi
-          
-          # 同步指定的文件
-          # if [ -f "source/README.md" ]; then
-          #   echo "同步 README.md"
-          #   cp source/README.md target/
-          # fi
+          echo "开始同步LICENSE到 ${{ matrix.repo }}"
           
           if [ -f "source/LICENSE" ]; then
             echo "同步 LICENSE"
             cp source/LICENSE target/
           fi
           
-          echo "文件同步完成"
+          echo "同步完成"
       
       - name: 提交并推送变更
         working-directory: target
@@ -86,7 +64,7 @@ jobs:
             echo "SYNC_STATUS=no_changes" >> $GITHUB_ENV
           else
             echo "检测到文件变更，准备提交"
-            git commit -m "chore: synchronize files from init-template repo
+            git commit -m "chore: synchronize files from workflows repo
 
           自动从 ${{ github.repository }} 同步更新
           源提交: ${{ github.sha }}
